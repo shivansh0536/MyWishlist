@@ -16,17 +16,19 @@ function WishlistPage() {
 
   return (
     <div className="container">
-      <h2>My Wishlist</h2>
+      <h2 className="section-title">❤️ My Wishlist</h2>
       {wishlist.length === 0 ? (
-        <p>No items in wishlist.</p>
+        <p className="note">Your wishlist is empty. Start exploring and add some favorites!</p>
       ) : (
         <div className="card-grid">
           {wishlist.map(product => (
-            <div key={product.id} className="card">
+            <div key={product.id} className="card wishlist-card">
               <img src={product.image} alt={product.title} />
               <h4>{product.title}</h4>
               <p>${product.price}</p>
-              <button onClick={() => removeFromWishlist(product.id)}>Remove</button>
+              <button className="btn-remove" onClick={() => removeFromWishlist(product.id)}>
+                ❌ Remove
+              </button>
             </div>
           ))}
         </div>

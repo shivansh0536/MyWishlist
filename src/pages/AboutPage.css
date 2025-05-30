@@ -1,0 +1,27 @@
+.about-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    color: var(--text-color);
+  }
+  
+  .about-page h3 {
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
+    color: var(--primary);
+  }
+  
+  .about-page ul {
+    list-style-type: none;
+    padding-left: 1rem;
+  }
+  
+  .about-page ul li::before {
+    content: "•";
+    color: var(--accent);
+    margin-right: 0.5rem;
+  }
+  
