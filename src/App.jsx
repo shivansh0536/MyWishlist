@@ -1,43 +1,41 @@
-import React, { useState } from 'react';
-import Navbar from './components/navbar';
-import Footer from './components/footer';
-import HomePage from './components/homepage';
-import ProductDetailPage from './pages/ProductDetailPage';
+// src/App.jsx
+import React, { useState, useEffect } from 'react';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import HomePage from './components/HomePage';
 import WishlistPage from './pages/WishlistPage';
 import RecommendationsPage from './pages/RecommendationsPage';
 import AboutPage from './pages/AboutPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 
 function App() {
   const [page, setPage] = useState('home');
-  const [selectedProduct, setSelectedProduct] = useState(null); // ✅ added
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [previousPage, setPreviousPage] = useState(null);
+
+  useEffect(() => {
+    document.body.classList.add('light');
+  }, []);
+
+  const handleViewProduct = (product, fromPage) => {
+    setSelectedProduct(product);
+    setPreviousPage(fromPage);
+    setPage('product');
+  };
 
   const renderPage = () => {
-    if (page === 'home') return <HomePage onProductClick={(product) => {
-      setSelectedProduct(product);
-      setPage('product');
-    }} />;
-    if (page === 'product') return (
-      <ProductDetailPage
-        product={selectedProduct}
-        goBack={() => setPage('home')}
-      />
-    );
-    if (page === 'product') return (
-      <ProductDetailPage
-        product={selectedProduct}
-        goBack={() => setPage('home')}
-      />
-    );
-    if (page === 'product') return (
-      <ProductDetailPage
-        product={selectedProduct}
-        goBack={() => setPage('home')}
-      />
-    );    
-    if (page === 'wishlist') return <WishlistPage />;
-    if (page === 'recommendations') return <RecommendationsPage />;
+    if (page === 'home') {
+      return <HomePage onProductClick={(product) => handleViewProduct(product, 'home')} />;
+    }
+    if (page === 'recommendations') {
+      return <RecommendationsPage onViewProduct={(product) => handleViewProduct(product, 'recommendations')} />;
+    }
+    if (page === 'wishlist') return <WishlistPage onViewProduct={(product) => handleViewProduct(product, 'wishlist')} />;
     if (page === 'about') return <AboutPage />;
-    return <HomePage />;
+    if (page === 'product') {
+      return <ProductDetailPage product={selectedProduct} goBack={() => setPage(previousPage || 'home')} />;
+    }
+    return <HomePage onProductClick={(product) => handleViewProduct(product, 'home')} />;
   };
 
   return (

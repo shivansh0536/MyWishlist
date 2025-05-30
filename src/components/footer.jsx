@@ -1,10 +1,22 @@
+import React from 'react';
+import './Footer.css';
+
 function Footer() {
-    return (
-      <footer className="footer">
-        <p>&copy; 2025 WishCart. All rights reserved.</p>
-      </footer>
-    );
-  }
-  
-  export default Footer;
-  
+  return (
+    <footer className="footer">
+      <div className="footer-content">
+        <div className="footer-logo">QuickCart</div>
+        <div className="footer-links">
+          <a href="#" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+          <a href="#" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+          <a href="#" target="_blank" rel="noopener noreferrer">Contact Us</a>
+        </div>
+        <div className="footer-copy">
+          &copy; {new Date().getFullYear()} QuickCart. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+export default Footer;

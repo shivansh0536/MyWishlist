@@ -1,14 +1,43 @@
+import React, { useState, useEffect } from 'react';
+import './nav.css';
+
 function Navbar({ onNavigate }) {
-    return (
-      <nav style={{ padding: '10px', backgroundColor: '#eee' }}>
-        <button onClick={() => onNavigate('home')} style={{margin: "10px"}}>Home</button>
-        <button onClick={() => onNavigate('wishlist')} style={{margin: "10px"}}>Wishlist</button>
-        <button onClick={() => onNavigate('recommendations')} style={{margin: "10px"}}>Recommendations</button>
-        <button onClick={() => onNavigate('about')} style={{margin: "10px"}}>About</button>
-      </nav>
-    );
-  }
-  
-  export default Navbar;
-  
-  
+  const [isDark, setIsDark] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Apply theme to body
+  useEffect(() => {
+    document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  }, [isDark]);
+
+  // Close mobile menu on navigation
+  const handleNavigate = (page) => {
+    onNavigate(page);
+    setMenuOpen(false);
+  };
+
+  return (
+    <nav className="navbar">
+      <div className="logo" onClick={() => handleNavigate('home')}>
+        QuickCart
+      </div>
+
+      <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+        <button onClick={() => handleNavigate('home')}>Home</button>
+        <button onClick={() => handleNavigate('recommendations')}>Recommendations</button>
+        <button onClick={() => handleNavigate('wishlist')}>Wishlist</button>
+        <button onClick={() => handleNavigate('about')}>About</button>
+      </div>
+
+      <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        ☰
+      </button>
+
+      <button className="theme-toggle" onClick={() => setIsDark(!isDark)}>
+        {isDark ? '🌙 Dark' : '☀️ Light'}
+      </button>
+    </nav>
+  );
+}
+
+export default Navbar;

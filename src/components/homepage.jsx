@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './HomePage.css';
 
 function HomePage({ onProductClick }) {
   const [products, setProducts] = useState([]);
@@ -23,7 +24,7 @@ function HomePage({ onProductClick }) {
 
   return (
     <div className="container">
-      <h2>All Products</h2>
+      <h2 className="page-title">🛒 All Products</h2>
       <div className="card-grid">
         {products.map(product => (
           <div
@@ -34,10 +35,13 @@ function HomePage({ onProductClick }) {
             <img src={product.image} alt={product.title} />
             <h4>{product.title}</h4>
             <p>${product.price}</p>
-            <button onClick={(e) => {
-              e.stopPropagation();
-              addToWishlist(product);
-            }}>
+            <button
+              className="wishlist-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                addToWishlist(product);
+              }}
+            >
               💖 Add to Wishlist
             </button>
           </div>

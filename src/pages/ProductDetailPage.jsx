@@ -1,14 +1,26 @@
+import React from 'react';
+
 function ProductDetailPage({ product, goBack }) {
-  if (!product) return <p className="container">No product selected.</p>;
+  if (!product) {
+    return (
+      <div className="container">
+        <button className="back-button" onClick={goBack}>
+          ← Back
+        </button>
+        <p>No product selected.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container">
-      <button onClick={goBack} className="back-button">← Back to Home</button>
-      <h2>Product Details</h2>
-      <div style={{ display: 'flex', gap: '30px' }}>
-        <img src={product.image} alt={product.title} style={{ height: '250px' }} />
+      <button className="back-button" onClick={goBack}>
+        ← Back
+      </button>
+      <h2>{product.title}</h2>
+      <div className="product-detail">
+        <img src={product.image} alt={product.title} />
         <div>
-          <h3>{product.title}</h3>
           <p><strong>Price:</strong> ${product.price}</p>
           <p><strong>Description:</strong> {product.description}</p>
           <p><strong>Category:</strong> {product.category}</p>
