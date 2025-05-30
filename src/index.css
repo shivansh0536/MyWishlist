@@ -213,3 +213,20 @@ body {
   --shadow-color: rgba(255, 255, 255, 0.05);
   background-color: #121212;
 }
+:root {
+  --primary-color: #0070f3;
+  --primary-hover: #0059c1;
+  --accent-color: #ff4081;
+  --text-color: #1e1e1e;
+  --card-bg: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --primary-color: #1e90ff;
+  --primary-hover: #156fd3;
+  --accent-color: #ff79c6;
+  --text-color: #f0f0f0;
+  --card-bg: #1a1a1a;
+  --shadow-color: rgba(255, 255, 255, 0.08);
+}

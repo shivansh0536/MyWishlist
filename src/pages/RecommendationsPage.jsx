@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './RecommendationsPage.css';
 
 function RecommendationsPage({ onViewProduct }) {
   const [recommended, setRecommended] = useState([]);
@@ -14,17 +15,15 @@ function RecommendationsPage({ onViewProduct }) {
   }, []);
 
   const handleView = (product) => {
-    // store if you still need it
     localStorage.setItem('selectedProduct', JSON.stringify(product));
-    // pass product back up so App.jsx can set it
     onViewProduct(product);
   };
 
   return (
     <div className="container">
-      <h2 className="recommend-heading">Recommended for You</h2>
+      <h2 className="page-title">✨ Recommended for You</h2>
       {recommended.length === 0 ? (
-        <p className="note">No recommendations yet. Please wait...</p>
+        <p className="note">Loading recommendations...</p>
       ) : (
         <div className="card-grid">
           {recommended.map(product => (
@@ -32,8 +31,8 @@ function RecommendationsPage({ onViewProduct }) {
               <img src={product.image} alt={product.title} />
               <h4>{product.title}</h4>
               <p>${product.price}</p>
-              <button onClick={() => handleView(product)}>
-                View
+              <button className="view-btn" onClick={() => handleView(product)}>
+                🔍 View Product
               </button>
             </div>
           ))}
